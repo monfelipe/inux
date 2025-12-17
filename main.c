@@ -8,16 +8,24 @@ void mover_janela(WINDOW *win, WINDOW *win2,
 
     switch (tecla) {
         case KEY_UP:
-            if (nova_y > 2) nova_y--;
+            if (win2 == NULL){
+                if (nova_y > 2) nova_y--;
+            }
             break;
         case KEY_DOWN:
-            if (nova_y < LINES - 9) nova_y++;
+            if (win2 == NULL){
+                if (nova_y < LINES - 9) nova_y++;
+            }
             break;
         case KEY_LEFT:
-            if (nova_x > 0) nova_x--;
+            if (win2 == NULL){
+                if (nova_x > 0) nova_x--;
+            }
             break;
         case KEY_RIGHT:
-            if (nova_x < COLS - 31) nova_x++;
+            if (win2 == NULL){
+                if (nova_x < COLS - 31) nova_x++;
+            }
             break;
     }
 
@@ -110,9 +118,6 @@ int main() {
                     touchwin(win1);
                     wrefresh(win1);
                 }
-                break;
-            case 'x':
-
                 break;
         }
     }
