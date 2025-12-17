@@ -97,10 +97,7 @@ int main() {
                     mvwprintw(win2, 0, 6, "Bem-vindo ao Inux");
                     touchwin(win2);
                     wrefresh(win2);
-                }
-                break;
-            case 'x':
-                if (win2 != NULL) {
+                } else if (win2 != NULL) {
                     werase(win2);
                     wrefresh(win2);
                     delwin(win2);
@@ -113,6 +110,9 @@ int main() {
                     touchwin(win1);
                     wrefresh(win1);
                 }
+                break;
+            case 'x':
+
                 break;
         }
     }
