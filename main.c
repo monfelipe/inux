@@ -133,7 +133,7 @@ int main() {
                         mvprintw(0, 2, "Inux");
                         attroff(A_BOLD);
                         refresh();
-
+                        touchwin(win1);
                         wrefresh(win1);
                     }
                     break;
