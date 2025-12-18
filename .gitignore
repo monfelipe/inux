@@ -3,3 +3,7 @@ inux
 test
 search.c
 test.h
+release/
+release.tar.gz
+logs.log
+comp.sh
