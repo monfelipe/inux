@@ -37,7 +37,7 @@ void mover_janela(WINDOW *win, WINDOW *win2,
     clear();
 
     attron(A_BOLD);
-    mvprintw(0, 2, "Inux");
+    mvprintw(0, 2, "Inux System");
     attroff(A_BOLD);
     refresh();
 
@@ -71,14 +71,14 @@ int main() {
     init_pair(1, COLOR_WHITE, COLOR_BLUE);
 
     attron(A_BOLD);
-    mvprintw(0, 2, "Inux");
+    mvprintw(0, 2, "Inux System");
     attroff(A_BOLD);
     refresh();
 
     win1 = newwin(8, 30, win_y, win_x);
     wbkgd(win1, COLOR_PAIR(1));
     box(win1, 0, 0);
-    mvwprintw(win1, 0, 11, "Inux");
+    mvwprintw(win1, 0, 13, "Inux");
     wrefresh(win1);
 
     while ((ch = getch()) != 'q') {
@@ -91,16 +91,10 @@ int main() {
                 mover_janela(win1, win2, &win_y, &win_x, ch);
                 break;
 
-            case '1':
-                contador++;
-                mvwprintw(win1, 5, 2, "Atualizada %d vezes  ", contador);
-                wrefresh(win1);
-                break;
-
             case 'c':
                 wclear(win1);
                 box(win1, 0, 0);
-                mvwprintw(win1, 1, 2, "Janela limpa!");
+                mvwprintw(win1, 1, 2, "Isso nao existe mais...");
                 wrefresh(win1);
                 break;
 
@@ -130,7 +124,7 @@ int main() {
 
                         clear();
                         attron(A_BOLD);
-                        mvprintw(0, 2, "Inux");
+                        mvprintw(0, 2, "Inux System");
                         attroff(A_BOLD);
                         refresh();
                         touchwin(win1);
