@@ -1,4 +1,5 @@
 #include <ncurses.h>
+#include <stdio.h>
 #include <unistd.h>
 
 void mover_janela(WINDOW *win, WINDOW *win2,
@@ -50,6 +51,12 @@ void mover_janela(WINDOW *win, WINDOW *win2,
 }
 
 int main() {
+    int porc = 2;
+    FILE *arquivo;
+    char linha[256];
+
+    arquivo = fopen("aplications.inux", "r");
+
     WINDOW *win1;
     WINDOW *win2 = NULL;
     int win_y = 3, win_x = 2;
@@ -97,34 +104,47 @@ int main() {
                 wrefresh(win1);
                 break;
 
-            case 'n':
-                if (win2 == NULL) {
-                    win2 = newwin(8, 30, 30, 50);
-                    wbkgd(win2, COLOR_PAIR(1));
-                    box(win2, 0, 0);
-                    mvwprintw(win2, 0, 6, "Bem-vindo ao Inux");
-                    touchwin(win2);
-                    wrefresh(win2);
-                } else if (win2 != NULL) {
-                    werase(win2);
-                    wrefresh(win2);
-                    delwin(win2);
-                    win2 = NULL;
-                    clear();
-                    attron(A_BOLD);
-                    mvprintw(0, 2, "Inux");
-                    attroff(A_BOLD);
-                    refresh();
-                    touchwin(win1);
-                    wrefresh(win1);
-                }
-                break;
+                case 'n':
+                    if (win2 == NULL) {
+                        porc = 1;          // reinicia linha
+                        rewind(arquivo);   // volta ao início do arquivo
+
+                        win2 = newwin(8, 30, 30, 50);
+                        wbkgd(win2, COLOR_PAIR(1));
+                        box(win2, 0, 0);
+
+                        mvwprintw(win2, 0, 4, " Bem-vindo ao Inux ");
+
+                        while (fgets(linha, sizeof(linha), arquivo) != NULL) {
+                            if (porc >= 7) break;
+                            mvwprintw(win2, porc, 1, "%s", linha);
+                            porc++;
+                        }
+
+                        wrefresh(win2);
+                    } else {
+                        werase(win2);
+                        wrefresh(win2);
+                        delwin(win2);
+                        win2 = NULL;
+
+                        clear();
+                        attron(A_BOLD);
+                        mvprintw(0, 2, "Inux");
+                        attroff(A_BOLD);
+                        refresh();
+
+                        wrefresh(win1);
+                    }
+                    break;
+
         }
     }
 
     if (win2 != NULL)
         delwin(win2);
 
+    fclose(arquivo);
     delwin(win1);
     endwin();
     return 0;
